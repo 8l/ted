@@ -3,7 +3,7 @@ Installing:
 	Exec 'make' and 'make install' to install ted.
 
 
-Usage:
+Usage:  SEE ted.help
 	Press F1 to see the brief help.  For more help, press ^A F1
 to edit '/usr/local/lib/Ted/tedrc'.  If you don't like the keyboard mapping,
 you can modify 'tedrc' to meet your own need and save it to the directory
