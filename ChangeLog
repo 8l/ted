@@ -1,0 +1,405 @@
+4.4d:
+  - sum a rectangular block (single vertical column of numbers) : Press 'C-='
+  - You can now use environment variable in string of tedrc.
+    Example:
+      1. In 'tedrc'
+         f [f1]  RaiseOrLoad("$TEDDIR/ted.help")
+           If TEDDIR is defined in shell environment variable, ted will use
+           it; otherwise it is the same as the TEDDIR in Makefile.
+           ( tedrc.tmpl is no longer needed )
+      2. You can now define
+         f [pause]	ExportStatus("$DBGSTOP %f:%y")
+         If the current os is Solaris
+             setenv DBGSTOP 'stop at'   in .cshrc
+         If the current os is Linux
+             setenv DBGSTOP 'b'   in .cshrc
+       (Actually this is not needed, if gcc is used, 'b' is set as default)
+     3. To prevent ted from interpreting the variable, use '\$variable'
+   - bug fix : setWinSize doesn't work.
+4.4c:
+  - set selection with mouse coredump on linux
+  - fix more bug reported by purify
+4.4b:
+  - Fixed some bugs reported by purify
+  - bugfix : Potentially coredump for paste operations.
+  - bugfix : cannot paste into MS Window app via Exceed.
+
+4.4a:
+  - bug : cannot paste into Sun's workshop's Dbx commands window
+  - text-coloring now can work correctly if window is scrolled right.
+  - set to read-only mode if the file is read-only.
+  - You can use [C-F11] to do complex 'grep' and filter and use select bar to
+    goto to the line you want to see.
+     Example: Looking for any assignment to a variable
+        1. Pressing [C-F11] will show a dialogue box with 'Execute Command'
+        2. Input 'grep -n 'vname.*=' *.[ch] | grep -v == | grep -v !='
+        3. Use currsor keys to select, Esc to escape, Enter to go to that file.
+  - accecpt Ctrl-Delete/Shift-Delete in edit line diaglogue box
+  - Press 'F12' to put 'stop at %f:%y' in X paste buffer. This is for 'dbx'.
+    You may want to change it to 'b  %f:%y' if you use 'gdb'.
+  - Readonly mode is not restored when a file is closed.
+  - Close the compile win automatically if the compiling is ok.
+4.3i:
+  - can determine 'Ted' file path by looking at the path of executable.
+  - serious bug : If '.tedfilepos' is not found, your file will be removed.
+
+4.3h:
+  - save font name by file
+  - initialize window size/posiition by file first so that there is no more
+    redraw and resize X event. This speeds up window creation on a slow modem
+    line.
+
+4.3g:
+  - add SetWinSize function   [CA-1][CA-2]
+    You can bind your predefined window size to keys
+4.3f:
+  - can accept '*' and '?' in 'Edit file' dialog box   (*~ *.o are excluded)
+4.3e:
+  - Search string within line block
+4.3d:
+  - Dup open bug : should not increase file idx
+
+4.3c:
+  - add 'csh' text coloring
+  - color of cursor is not properly restored.
+  - automatically installs private colormap if colors are not enough.
+4.3b:
+  - Display tab as special character you define. You can use it to debug
+    Tab-space mixing problem. Press [C-T][T] to toggle display of Tab char,
+    see 'tedrc' for more details.
+4.3a:
+  - A serious bug was found. All users should update their Ted.
+  - When you paste Ted's selected text into FrameMaker 5.5, it doesn't coredump
+    now.
+  - Line number is not refreshed if you use match bracket.
+4.2m:
+  - may coredump after closing file
+  - Add FModifiedQuitYN option, see tedrc.tmpl for more info
+4.2l:
+  - window refresh bug : blank line when you raise the window.
+4.2k:
+  - window display bug : blank line
+4.2j:
+  - Multiple file names at command file don't work
+4.2i:
+  - Use XCopyArea so that scroll up/down is faster on low bandwidth line
+    (e.g. modem)
+  - Overwrite mode doesn't scroll left.
+  - Dup open handling bug
+4.2h:
+  - Duplicate open handling doesn't work if you open more than two files.
+  - Coredump if you use paste over low bandwidth line (use remote display).
+4.2g:
+  - Change file duplicate open handling scheme to avoid creating too many X
+    atoms.
+  - Cursor postion is not restored correctly when opening a new file.
+4.2f:
+  - Cursor postion is not saved when pressing Ctrl-W.
+  - If a file is already opened, the second process will be set to read-only
+    mode; and the window of the first one will be raised. It can be applied to
+    different hosts with the same X display. If you set ExitDupOpen=1, the
+    second one will exit.
+4.2e:
+  - Replace string 'W' (word filter) doesn't work.
+  - Compiling failed on Linux
+  - vi style goto ( +line_no ) doesn't work
+  - Clt-Alt-F to switch font. (Edit tedrc to change font list)
+  - can accept file name completion like  '~/.cs'  '~dhliu/.cs'
+  - File name completion bug :  '/' and long path name
+4.2d:
+  - compiling failed on HP-UX
+  - Change A-V output format
+  - Auto backup cursor missing bug
+4.2c:
+  - the month that A-V prints is incorrect.
+  - Close '#noname' automatically if it is empty before opening a new file.
+  - forgot to include 'time.h' in f.c
+4.2b:
+  - missing file 'tedrc.filevisit'
+4.2a:
+  - bug fix : Mouse click to set cursor position work incorrectly if page
+              scrolls right.
+  - initial command file ( -c file)
+  - New command line argument (-batch  (Execute without opening display)
+  - can restore cursor position, window size, window position by files
+    (can be turned off in tedrc)
+  - Read-only mode -r (command line)  or  C-T R to toggle on/off
+  - Use '-' as file name to read input from stdin
+  - c tag '-t' bug fix
+  - A-V to see/edit the list of files you have visited.
+4.1b:
+  - Upper/Lowercase block can also be applied to line block
+  - new function of tedrc : LocateStr("string","opt")
+  - new function of tedrc : ReplaceStr("string","replacement","opt")
+  - CA-P (control-alt P) to export macro to "ted.macro". (text file format)
+    You can include this file in your 'tedrc' or 'localtedrc'
+  - Bug fix : New definitions in 'localtedrc' are not loaded
+4.1a:
+  - Control the sequence of splitting window showing up (Please read tedrc)
+  - Cursor follows mouse click, not always good, but is what people expected.
+  - Delete block automatically if you press delete or input string in the block
+    (Thanks to Zsolt Koppany (zkoppany@multix.de) )
+  The above three options can be enabled/disabled in tedrc
+
+  - bug fix : didn't check if mouse pointer is past end of file.
+  - recognize the first line of script file to determine language type
+    Use regular expression ( e.g. #!.*/bin/perl.* )
+  - Avoid redundant screen redrawing on Ted's startup
+  - Avoid redundant redrawing of 'End of file'
+  - Perl lang def update from jong@mrc-lmb.cam.ac.uk
+
+4.0h:
+  - add f8 key to grep browser
+  - write line block bug if file exits
+  - [C-K][C-T]  Convert Tab to Space
+  - Doesn't exit if an unknown function is found.
+  - bug fix : Find string doen't update line number.
+  - [C-T][V] to enter vertical input mode
+4.0g:
+  - cwin refresh bug
+4.0f:
+  - Sun's cc is now supported in the simple IDE.
+  - Select IDE compiler type in 'tedrc', so you can also set it in
+    'localtedrc'.
+  - IBM AIX port with (C compiler compile win support)
+4.0e:
+  - file name display bug on status line
+  - Compile win breaks lines longer than window width.
+  - Remove '\r' from compile win (for javac)
+4.0d:
+  - wrong text coloring on non-C style language
+4.0c:
+  - C comment coloring bug
+  - Use +linenumber as command line argument to goto line (vi-style)
+  - Use -t tagname to goto C tag (vi-like)
+  - coredump if you edit an empty file
+4.0b:
+  - keep file keymap mode when switching between files.
+  - When you use 'grep output',the F11 key, you can use up/down keys to select
+    the line you want to see and press enter to goto that row of the file.
+  - multiple-line C comment text-coloring is better
+  - marked lines & file closing bug
+4.0a:
+  - Mouse selection bug
+  - LoadTedrc in tedrc caused memory leak and coredump
+  - Write marked lines to a file (c-k w)
+
+3.6c:
+  - Regular expression search/replace
+3.6b:
+  - Simple vi mode support : Press Escape will enter vi mode. The emulation
+    is not complete. The purpose is to let ted also have some advtanges of vi.
+    You can create your own editor mode.
+    In 'tedrc' :
+      f [escape]  left(); SwitchKeyDef(1)
+      LoadKeyDefInto "tedrc.vi" 1
+    #    load 'tedrc.vi' into def # 1
+
+    In 'tedrc.vi' :
+      f [i] SwitchKeyDef(0)
+    #    0 is def # for 'tedrc'
+
+    Keyword completion is moved to alt-`
+  - vi style input save buffer(the '.' key) :
+      When you have type a string, you can copy it to other place immediately
+      by press 'alt-.' keys.
+  - Copy-Cut-Paste function  :
+      s-Ins : copy    s-Del : cut    s-Ins : paste
+  - Move 'Delete to the beginning of line' to s-backspace
+  - You can use C-style line break '\' in 'tedrc'. It is useful for 'lang'
+  - Can define up to 4 keys (original 2 keys)
+  - German characters (äöüÄÖÜ) input
+  - TEDDIR is not movable bug
+    Thanks to Dirk Hillbrecht(dh@informatik.uni-hannover.de)
+
+3.6a:
+
+  - Keyword completion : Type the beginning several chars of a keywword and
+    press escape-escape. If only one match is found, Ted puts the keyword
+    directly. If more than one match is found, You can select from the menu.
+  - Relace string within line block without prompt didn't work.
+  - Java text coloring support
+  - If too many keyword types are defined in tedrc, the color is in a mess.
+  - File name completion bug: not in file name order and sometimes coredump
+  - Move cursor beyond the length of current row:
+      a. PutStr will automatically fill space when you put string,
+          instead of putting cursor to the end of the row.
+      b. When moving left, cursor doesn't go to end of line automatically
+  - If you define too many keywords in tedrc using older versions, you have
+    to recompile 'ted'. With this version, you don't need to.
+  - File brower is not redrawn after resizing or redrawing
+
+3.5c:
+  - File browser coredump on Solaris
+  - Syntax coloring bug fix for fortran
+  - Add Sun special keys
+  - Press Alt-E and Enter will display file browser.
+  - bug fix : delete line should not adjust mark if current file is not
+    mark owner
+  - Repeat search on multiple files may coredump.
+  - File name completion in Edit, Write dialog box  (Tab key)
+  - -display coredump
+  - string searching coredump
+  - goto previous string-searching match
+    (forward -> backward,  backward -> forward)
+  - can open up to 256 files
+3.5b:
+  - file browser listing is configurable with regular expression in 'tedrc'
+  - Press Shift + left mouse button to move curor to mouse pointer
+  - Rectangular block color display bug
+3.5a:
+  - Thanks to JULIAN MESA LLOPIS (a00409@eps.ua.es) for his file browser
+    (List files in the direcotry)
+  - Press Ctrl-M to start/stop macro recording, Alt-P to play macro
+  - keyword coloring bug fix
+3.4b:
+  - Bug : 'fdgets2' Error message on HP-UX
+  - See title tar
+3.4a:
+  - Fatal bug : May coredump on load (since 3.3c)
+                Thanks to ejc@sni.co.uk 's Bug fix
+  - Bug : Cannot use color name like 'grey80' in languae color definition
+  - Bug : more language color bug fixes
+3.3d:
+  - Bug : Garbage chars at the end of title bar.
+  - Bug : Ted doesn't check whether the number of keywords in a type exceeds
+      the array boundary. The PERL definition in the distributed
+      has keywords more than 100 which is much larger than the default
+      60. It is a serious bug.
+      Thanks to ejc@sni.co.uk John Clutterbuck for his bug report.
+3.3c:
+  - Remove line length limit (8192), only limited by your virtual memory
+    available
+  - Bug : Unable to save file name beginning with '#'
+  - Bug : String search Word/Ingorecase option doesn't work
+  - Bug : file is not closed after saving
+3.3b:
+  - Add function : Press Ctrl-[ to match the bracket outside the current
+       page.
+3.3a:
+  - Add function : Duplicate the first row of rect block to the rest
+       of rect block (copy down to the end of block)
+       Ctrl-Q d
+  - Bug: cannot save new file.
+3.2c:
+  - Beep if the file doesn't exist, to differentiate empty files and
+    new file.
+  - Bug fix: coredump when shifting block up/dn over empty lines.
+  - Bug fix: save file though the file is read-only
+  - Bug fix: Not save the content of symbolic link file
+  (Thanks to comelli@seis.ogs.trieste.it for his bug report)
+3.2b:
+  - Insert/Overwrite mode switching in input prompt window
+  - Bug fix: Ted will coredump if you select lines with mouse past
+    'End of file'.
+  - Add capablility of string replacement within line block (l option)
+  - Bug fix: line block shifting bug
+3.2a:
+  - Input prompt window can scroll left/right.
+3.1c:
+  - Press Alt or Control + mouse motion can select rectangular block now.
+    (Not very complete, but better than nothing)
+  - CtrlAlt-Left or Right can also be applied to line block now.
+    (Suggested by Jong jhp20@cus.cam.ac.uk)
+3.1b: - Press A-F11 to search for string at cursor.
+  - DelWord bug. Ted should delete space only, if the char at cursor is
+    space.
+3.1a:
+  - If you edit a file which is already opened in Ted, Ted will go to
+    this file instead of opening a new one.
+  - Strip carriage return (^M) automatically.
+  - Press Shift-F11 at the keyword to lookup ctag
+3.0c:
+  - Change F11 to 'grep -n -w'   Match only if it is whole-word
+  - bug fix of ted window with too many columns
+  - auto focus-in on start-up now can be enabled/disabled
+  - Different colors in insert/overwrite modes.
+3.0b:
+  - Expose event bug. Window-moving is now smoother.
+3.0a
+  - Run as a background process automatically. It can be disabled by the
+    X app default & command line argument 'bgps'. Suggested by Jong.
+    For those who need spelling check, you must disable 'bgps'
+  - Mouse lines selection can scroll down if you move pointer above
+    the text window.
+  - Add jong@mrc-lmb.cam.ac.uk's tedrc definition for perl
+  - Add triple-click line selection
+2.3c:
+  - Bug fix: Cursor will be lost if you press ctrl-end and the last line
+       is longer than the width of edit window.
+  - Bug fix: ctrl-home should move page to the 1st column.
+  - Bug fix: coredump if input chinese
+2.3b:
+  - Mouse lines selection can scroll down if you move pointer outside
+    text window.
+  - Bug fix: You cannot input uppercase chars even though caps lock is
+    on.
+2.3a:
+  - Add whole-word searching capability.
+  - Unknown key bug is really fixed this time.
+2.2b:
+  - Bug fix: Ted will coredump if Ted doen't know the key press.
+       If you want to add this key to Ted, you can use 'xev'
+       to see the name of the key; then you can add this key to
+       'xkey.c'.
+2.2a:
+  - Add CurAutoUpDownAtEdge switch
+2.1a:
+  - Overwrite mode is better in this version. No more strange chars.
+
+2.0b:
+  - Add 'include' command for tedrc. It will include the specified
+    file. It is useful for current directory  environment setting.
+  - Alt,Ctrl + key combinations should work now.
+  - Undo may coredump when switching between files.
+2.0a:
+  - Add C-up/down:Page up/down one line  (i.e. scroll lock)
+  - Reload tedrc capability (S-F12). 'tedrc' file was not close.
+  - Add merge tedrc function (A-F12)
+1.6b:
+  - Skipping to prev/next word can display cursor column number.
+  - Ted can load multiple files specified in the command line.
+    But it can only load up to 10 files. Modify MAX_FILE in edit.h
+    if you want to change it.
+1.6a:
+  - Paste from xterm is ok now.
+
+1.5b:
+  - Cursor in the blank of the beginning of line should not use indent.
+
+1.5a:
+  - The tag is changed to global tag (multiple files). You can go any
+    line in any file easily.
+  - Add shifting text in rectangular block function (Alt+ Left/Right ..)
+
+1.4b:
+  - Add delete to the beginning of line function
+  - Delete to the end of line bug fix (may coredump)
+
+1.4a:
+  - Retangluar block undo/redo bugs
+
+1.3b:
+  - Language keyword/syntax colors are handled correctly when you switch
+    between windows.
+  - Fix a bug in set selection under multi-window and mutlit-file mode
+    when you use mouse to switch between files.
+  - Fix a bug in pasting block between files with the middle button of
+    mouse. The mark was moved down in the source file.
+
+1.3a:
+  - can handle C++ '//' comment
+  - '/*' will not use C comment color in languages other than C,C++
+  - can automatically jump to the line of error message that has
+    compilation error
+  - The insert/overwrite and indent states are initialized when you split
+    the window.
+1.2b:
+  - Fix a bug in syntax highlighting (may coredump)
+  - The file mode will be preserved when saving a file.
+    (Esp. for shell-script)
+1.2a:
+  - Indent
+  - TrimBlankTail option
+  - Backup of original file
+  - make .o for the currently edited file  (ExeCmdFnameExt)

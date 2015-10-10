@@ -1,0 +1,72 @@
+Installing:
+	Edit Makefile, choose an OS and modify XINC and LDFLAGS if necessary.
+	Exec 'make' and 'make install' to install ted.
+
+
+Usage:
+	Press F1 to see the brief help.  For more help, press ^A F1
+to edit '/usr/local/lib/Ted/tedrc'.  If you don't like the keyboard mapping,
+you can modify 'tedrc' to meet your own need and save it to the directory
+"$HOME/.Ted". You should be able to configure your keyboard mapping similar to
+'joe' or 'emacs', but the default mapping is easier to use.
+Note that some X servers map Shift-F1..F10 to F11..F20. It is also possible
+that your X server doesn't support the key combinations you want. Some X server
+like HP's doen't accept the combination of Alt key and (A..Z 0..1) keys.
+You can first press ^A (C-a) then the 2nd key the help file specified.
+You may also try the xmodmap files 'xmodmap.hp.*' for HP. You can put
+	xmodmap xmodmap.hp.??? (model) 		in your X startup script
+
+	 Some X servers map 'Backspace' to 'Delete'. If your backspace key doesn't
+work. Add the following line to your .xinitrc
+	xmodmap -e 'keycode 22 = BackSpace' (Linux XFree86)
+
+Your window manager(e.g. fvwm) may intercept some key strokes like a-f10.
+In this case, you can modify your .fvwmrc to disable the key bindings.
+You can use 'xev' to see whether your X app can receive the key stroke or
+your X server does some translations.
+
+	 The default tedrc file name 'ted' will first load is 'tedrc'. You can change
+it by using the command line arg '-tedrc'.  Ted will search for the specified
+tedrc in the sequence of "./"(can be disabled, see next), "$HOME/.Ted"  and
+'/usr/local/lib/Ted'.
+
+	 If you don't like the default colors of ted, you may modify tedrc to set the
+color of ted.
+
+	 The C tag support requires elvis's  'ref' and 'ctags'.  Both of them are
+included. Press Alt-F9 will execute ctags to rebuild 'ctags' file. Press Alt-T
+to use the 'goto C tags' function.
+
+* Ted's command line argument and application default
+----------------------------------------------------------------------
+	argument	application default	expected arg
+----------------------------------------------------------------------
+	-fg		Ted.fg			foreground
+	-bg		Ted.bg			background
+	-fn		Ted.fn			font name
+	-g		Ted.g			geometry
+	-tedrc		Ted.tedrc		start-up tedrc
+	-display	*   			Display name
+	-cdtedrc	Ted.cdtedrc	0:ignore current dir tedrc (security)
+					1:load current dir tedrc if it exists
+	-bgps           Ted.bgps        0:disable exec as a background process
+					1:enable exec as a background process
+					 (default)
+	-autofocusin    Ted.autofocusin 0:disable Auto focusIn on startup
+					1:enble Auto focusIn on startup
+----------------------------------------------------------------------
+Tips:
+- Press F9 will execute 'make' and enter IDE mode.
+	Press F12 will execute './ted'
+	These are my development settings for 'ted'. Modify them in tedrc as you
+	wish.
+- Sometime you need to do 'grep' in xterm to search for a keyword.
+	In ted, you simply place the cursor to the keyword you want to search and
+	press F11. It will do 'grep -n KEYWORD *.[ch]' and pipe the out to 'ted'.
+	Press F8 to switch between files. Remember to press 'F4' to close the output,
+	otherwise you will open too many files. You can modify tedrc to 'grep' other
+	files like '.cpp .pas .for'.
+-------------------------------------------------------------------------------
+Send bug reports, comments and suggestions to:
+Edward D. H. Liu, Taiwan
+dhliu@solar.csie.ntu.edu.tw

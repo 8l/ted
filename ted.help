@@ -1,0 +1,142 @@
+Cursor movement:
+  C-home:begin of file  C-End:end of file
+  C-Pgup:Page top  C-PgDn:Page Bottom
+  C-up/down:Page up/down one line  (i.e. scroll lock)
+  C-left C-right skip to prev/next word
+  C-[ : Match the bracket outside the current page.
+  Shift + left mouse button : Move cursor to mouse pointer
+Edit:
+  C-Backspace,C-Y:Del line   A-Delete:Del word
+  C-Delete:Del to the end of line   S-backspace:Del to the beginning of line
+  A-J:join next line
+  Escape : enter 'vi' mode, 'i','o','a', left, right to return to normal Ted
+   mode
+File:
+  A-E:Edit file  F2:Save  F4:Close/Quit  A-W:Write to file
+  C-K W: Write marked lines
+  F8:Switch File(forward) A-F8:Switch File(backward)
+  A-F6:Set hot file  F6:Go to hot file  C-K R:Include file  A-I:Change Dir
+  C-K P: Print file (need to modify tedrc to specify printing command)
+  C-K S: Spelling check (need ispell to run)
+  C-K D:  File browser(list files in Directory)
+  C-K W:  Write line block to a file.
+  A-V: see/edit the list of files you have visited.
+  S-F10: edit file name at cursor
+Search string:
+  A-S: Search string  A-R:Find & replace string
+  A-N:Repeat last search (Next)   C-N:Goto previous match
+  A-F11: Find the word string at cursor.    F11: grep browser
+  C-F11: grep brower which prompts you to input the command (must use grep -n)
+         Example : Looking for any assignment to a variable
+           ==> Input : grep -n 'vname.*=' *.[ch] | grep -v == | grep -v !=
+Block:
+  A-L:Mark line   A-B:Mark rect block  S-up,down,left,right  extend block
+  A-C:Copy &unmark block  A-Z, S-Ins:Copy block  A-D:Delete block
+  A-M:Move to  A-U:Unmark  A-O:Overwrite copy (rectangular)
+  C-Q U uppercase block  C-Q L lowercase block
+  CtrlAlt-left,right,up,down  Shifting text in line/rectangular block
+  Ctrl-Q D Duplicate the first row of rect block to the rest of rect block
+     (copy/Fill down to the end of block)
+  Alt or Control + mouse left button + motion  to select rectangular block
+  C-Ins : Copy    S-Del : Cut    S-Ins : Paste
+Goto, tag:
+  A-G:Goto to line  C-1..3:set tag1..3  A-1..3:goto tag1..3  Alt-T: goto C tag
+  S-F11 goto C tag of the keyword at the cursor
+Misc:
+  C-U,C-Z:Undo  C-R:Redo  Insert:Ins/Del  C-T I:Toggle Indent
+  F9:make  S-F9:make current edited file only
+  Alt-F9 create ctags  F5:goto compile win  Alt-F5:close compile win
+  C-Q W : Set word-wrap width
+  S-F12 reload tedrc
+  C-M  Start/Stop macro recording    A-P : Play macro
+  CA-P : Append macro to a file (default:ted.marco)
+  Alt-` : keyword completion. Place '()' automatically.
+  Alt-Escape  :                      doen't place '()'
+      PgDn for next page, PgUp for previou page
+  Alt-. : Repeat/Copy the string typed/deleted (the vi '.' key)
+  C-K C-T : Convert Tab to Space
+  C-T V  : Toggle vertical input mode   C-T R  : Toggle Read-only input mode
+  Ctrl-Alt-F : Switch Font              C-T T  : Toggle display Tab char
+  F12 or Break: Put 'stop at filname:row' into X paste buffer for 'dbx'
+       debugging. Change 'tedrc' if you want to use it with 'gdb'
+  C-=: sum a rectangular block (single vertical column of numbers)
+-------------------------------------------------------------------------------
+o Press C-A F1 to see system default tedrc, Modify the definition and
+  save to ~/.Ted/tedrc.  Press F8 to return to your previous file.
+
+o F9:make  A-7:^[[7m  A-0:^[[m  C-Q E execute command
+
+o Press 'Tab' key in Search or Replace win to enter next field.
+
+o Press Tab key in File 'Edit' or 'Write' dialog box to do file completion.
+  Repeat pressing Tab until the file name you want appears.
+
+o Pressing A-F10 will do 'ls -l' and pipe the output to 'ted'. Then you can
+  place the cursor to the file your want to edit and press S-F10 to load the
+  file. If you press S-F10 over directory name, ted will change current
+  directory.
+o You can search for keywords in your *.[ch] by placing the cursor to the
+  word you want to look up and press F11. It will do 'grep' and pipe the output
+  to 'ted'.
+
+o Press F9 and Ted will enter compile IDE mode.  Press enter to select the
+  error line you want to see. The file must be opened in advance. Press F5 to
+  return to the compile win. Press Alt-F5 in edit win to close the compile win.
+  Pressing ESC in the compile win will also close the compile win.
+
+o You can scroll backward/forward to the command you have typed in the input
+  prompt window by pressing up/down keys.
+o Change WarpWidth in 'tedrc' if you want to use word wrapping
+o Change TabWidth in 'tedrc' if you want to set tab width (default 8)
+o The initial mode of insert/overwrite autoindent/noident can be set in tedrc.
+o If you press shift+[right arrow] key first, ted will mark rectangular block.
+  If you press shift+[down arrow] key first, ted will mark line block.
+o To use ctags, press Alt-F9. 'Ted' will execute ctags to build the 'ctags'
+  file. After that, you can press Alt-T to go to the function or struct you
+  want to see.
+o If you open many files in Ted. It would be tedious to press F8 to switch
+  to the file you want to edit. In this case, Press Alt-F6 to set the current
+  as hot file. Press F6 to return to the hot file.
+  Another way is to use the set tag function key:
+      C-1..3,   The tag is global. In other words, if you set the tags in
+          different files, you can switch between files by pressing
+      A-1..3
+o Since version 2.0b, 'Ted' has a new command in 'tedrc' called 'include'.
+  You can edit a small tedrc file named 'localtedrc' in the current dir.
+  When 'Ted' startup, it will merge this file. It is useful for project-
+  specific customization.
+o You can use C-M(macro recording), CA-P to write initial command script file
+  or put binding in 'tedrc' or 'localtedrc'
+*******************************************************************************
+* Ted's command line argument and application default (in ~/.Xdefaults or ~/.Xresources )
+----------------------------------------------------------------------
+  argument  application default expected arg
+----------------------------------------------------------------------
+  -fg   Ted.fg      foreground
+  -bg   Ted.bg      background
+  -fn   Ted.fn      font name
+  -g    Ted.g     geometry
+  -tedrc    Ted.tedrc   start-up tedrc
+  -display  *         Display name
+  -cdtedrc  Ted.cdtedrc 0:ignore current dir tedrc (security)
+          1:load current dir tedrc if it exists
+  -bgps           Ted.bgps        0:disable exec as a background process
+          1:enable exec as a background process
+           (default)
+  -autofocusin    Ted.autofocusin 0:disable Auto focusIn on startup
+          1:enble Auto focusIn on startup
+  -t  goto C tag
+  -c  initial command file
+  -r  Read-only mode
+  -batch  batch jobs (no display)
+  +lineno  goto lineno
+
+------------------------------------------------------------------------------
+Send bug reports, comments and suggestions to:
+Edward D. H. Liu
+dhliu@solar.csie.ntu.edu.tw
+------------------------------------------------------------------------------
+FTP sites:
+ftp://moon.csie.ntu.edu.tw/pub/X/ted  (Taiwan, with latest update)
+ftp://ftp.x.org/contrib/editors   (US)
+------------------------------------------------------------------------------

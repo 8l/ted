@@ -1,0 +1,6 @@
+cd
+tar cvfz ted.tgz ted/*.[ch] ted/Makefile ted/Makefile.b5 ted/tedrc ted/bak \
+ted/cpe ted/ted.help ted/Copyright ted/Intro ted/ted.lsm ted/xmodmap.* \
+ted/README ted/README.Chinese ted/ChangeLog ted/localtedrc ted/tedrc.vi \
+ted/tedrc.grep ted/tedrc.filevisit
+wc -l ted/*.[ch]

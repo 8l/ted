@@ -1,0 +1,6 @@
+0. 請先閱讀 README
+1. cp Makefile.b5 Makefile
+2. make
+3. make install
+
+需要 xcin 的 cli_xcin.o

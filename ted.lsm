@@ -1,0 +1,14 @@
+Begin3
+Title:          Ted: An Editor for X window
+Version:        3.6a
+Entered-date:   01APR96
+Description:    A editor for X window. Fully configurable keyboard. Multiple
+		Windows & files, Undo & Redo, bracket matching and more
+Keywords:  	X window, editor
+Author:         Edward D. H. Liu
+Maintained-by:  dhliu@solar.csie.ntu.edu.tw
+Primary-site:   ftp://ftp.x.org/contrib/editors
+Original-site:  ftp://moon.csie.ntu.edu.tw/pub/X/ted
+Platforms:      Tested:Linux, HP-UX and SunOS/Solaris     should be very portable
+Copying-policy: GPL
+End

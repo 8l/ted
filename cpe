@@ -1,0 +1,3 @@
+mv $HOME/bin/bin.sun/e $HOME/bin/bin.sun/e_
+cp ted $HOME/bin/bin.sun/e
+cp tedrc* $HOME/.Ted

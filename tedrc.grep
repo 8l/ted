@@ -1,0 +1,13 @@
+f [up]  Unmark(); up(); MarkLn();
+f [down]  Unmark(); down(); MarkLn();
+f [left]	left()
+f [right]	right()
+f [home]        home()
+f [end]         end()
+f [pgup]  Unmark(); pgup(); MarkLn();
+f [pgdn]  Unmark(); pgdn(); MarkLn();
+f [enter] GotoGrep(0)
+f [escape] quit2()
+f [f4] quit2()
+f [f8] NextFile()
+f [a-s]   FindStr()

@@ -1,0 +1,544 @@
+# tedrc is case-sensitive
+# the key def can be any combination of a,c,s (modifier)
+#    a  -> Alt     c -> Control    s -> Shift
+# The string definition is C-string-like:
+# \t : tab   \n : enter  \e : escape
+# \x??  two hexadecimal digits
+# $variable   :  shell environment, add '\' before '$' to disable interpreting
+#
+# if you want to define shift key+(Ctl or Alt) + [0..9], you should use
+# '!@# ..)' instead.
+#
+# Up to 4 keys (modifier keys excluded) can be defined
+# The 2..4 keys only accept lowercase keys.
+#
+###### cursor movement ######
+f [up]		up()
+f [down]	down()
+f [left]	left()
+f [right]	right()
+f [pgup]        pgup()
+f [pgdn]	pgdn()
+f [c-up]	spgup()
+f [c-down]	spgdn()
+f [home]        home()
+f [end]         end()
+f [c-left]	CurLeftWord()
+f [c-right]	CurRightWord()
+f [c-brl]	MatchBracket()
+f [c-brr]	MatchBracket()
+####### page op #######
+f [c-pgup]	pgtop()
+f [c-pgdn]	pgbottom()
+f [c-home]	beginfile()
+f [a-home]	beginfile()
+f [c-end]       endfile()
+f [a-end]       endfile()
+###### Search, Replace string #####
+f [a-s]   FindStr()
+#f [c-a][s]	FindStr()
+f [c-k][f]	FindStr()
+f [a-f]		FindStr()
+f [a-r]		RepStr()
+#f [c-a][r]	RepStr()
+f [a-n]   RepFind()
+#f [c-a][n]	RepFind()
+f [c-l]		RepFind()
+f [c-n]		PrevFind()
+#f [c-s][w]	LocateStr("while","i");
+#f [c-s][r]	ReplaceStr("while","ggyy","in");
+###### Mark lines, block ######
+f [a-l]		MarkLn()
+#f [c-a][l]	MarkLn()
+f [a-b]		MarkBlk()
+#f [c-a][b]	MarkBlk()
+f [a-u]		Unmark()
+#f [c-a][u]	Unmark()
+f [s-up]	ExtMarkUp()
+f [s-down]	ExtMarkDown()
+f [s-left]	ExtMarkLeft()
+f [s-right]	ExtMarkRight()
+###### Block operations, Copy Del, Move ######
+f [a-m]		MvArea()
+#f [c-a][m]	MvArea()
+f [a-z]		CpArea()
+#f [s-ins]	CpArea()
+f [a-c]		CpArea(); Unmark()
+f [a-d]         DelArea()
+#f [c-a][d]  DelArea()
+# Overwrite copy, rectangle block only
+f [a-o]		OwCp()
+#f [c-a][o]	OwCp()
+f [a-ins]	OwCp()
+f [c-q][u]	UpLowBlk(1)
+f [c-q][l]	UpLowBlk(0)
+f [a-up]	BShiftUpDn(0)
+f [a-down]      BShiftUpDn(1)
+f [a-left]	BShiftLR(0)
+f [a-right]	BShiftLR(1)
+f [ca-up]	BShiftUpDn(0)
+f [ca-down]     BShiftUpDn(1)
+f [ca-left]     BShiftLR(0)
+f [ca-right]    BShiftLR(1)
+f [c-q][d]	Dup1stToEndBlk()
+f [c-ins]   ToPasteBuff(); Unmark()
+f [s-ins]		PasteBuffPut()
+f [s-del]		ToPasteBuff(); DelArea()
+###### Misc Edit commands ######
+f [f4]		quit()
+f [c-x][c-c]	quit()
+f [del]		del()
+f [c-bs]	DelLn()
+f [c-y]		DelLn()
+f [c-del]	DelEol()
+f [a-del]	DelWord()
+f [s-bs]	DelBol()
+f [bs]		bs()
+f [enter]	enter()
+f [a-j]		JoinLine()
+f [c-k][y]	Unmark();down();MarkLn();endfile();MarkLn();DelArea();
+###### text Window ######
+f [f7]		SwWin()
+f [c-w]		SplitWin()
+####### Files command #####
+f [a-f8]	PrevFile()
+f [f8]		NextFile()
+f [f2]		SaveFile()
+f [a-w]		WrFile()
+#f [c-a][w]	WrFile()
+f [c-k][w] WriteBlk()
+f [a-e]		EdFile()
+f [a-v]	VisitedFile(".tedvisited"); EditFName(".tedvisited"); beginfile(); MarkLn(); SwitchKeyDef(3)
+f [a-i]		ChDir()
+f [c-k][r]	IncFile()
+f [a-f6]	SetHotFile()
+f [f6]		TgHotFile()
+f [c-k][d]	FileBrowser()
+####### Misc commands, undo, redo, goto line, set tag, readpipe,
+f [ins]		TogIns()
+f [c-t][i]	TogIndent()
+f [c-t][v]	TogVertical()
+f [c-t][r]	TogReadOnly()
+f [c-t][t]	TogDispTab()
+f [c-q][w]	SetWordWrap()
+f [c-u]		Undo()
+f [c-z]		Undo()
+f [c-r]		Redo()
+f [a-g]		GotoRow()
+f [f9]          SaveIfModified(); Compile("make")
+#f [f9]          SaveIfModified(); Compile("make -f Makefile.b5")
+#f [f9]         SaveIfModified(); system("make -f Makefile.dbg &")
+# IDE compile win
+f [f5]		TogCpEdit()
+f [a-f5]	CloseCpWin()
+f [a-f9]	system("ctags -t -v -s *.[ch] *.cpp &")
+#  up to 10 tags can be defined
+f [c-1]		SetTag(1)
+f [c-2]		SetTag(2)
+f [c-3]		SetTag(3)
+f [a-1]		GotoTag(1)
+#f [c-a][1]	GotoTag(1)
+f [a-2]		GotoTag(2)
+#f [c-a][2]	GotoTag(2)
+f [a-3]		GotoTag(3)
+f [a-t]		LookupTag()
+f [s-tab] KeywordComp()
+f [a-escape] KeywordComp()
+f [a-`] KeywordComp();
+#f [escape][escape] KeywordComp();
+f [escape]  left(); SwitchKeyDef(1)
+f [a-.] PutStrSave()
+###
+#f [f12]		system("./ted &")
+# you can set the DBGSTOP enviornment variable
+f [pause]	ExportStatus("$DBGSTOP %f:%y")
+# for 'dbx'
+#f [pause]	ExportStatus("stop at %f:%y")
+# for 'gdb'
+#f [pause]	ExportStatus("b %f:%y")
+
+# will append current file name to the command
+f [c-k][p]      SaveIfModified(); SystemFname("2lp")
+f [c-k][s]      SaveIfModified(); SystemFname("xterm -e ispell"); Reload()
+f [a-f10]       ReadPipe("ls -al *.[fch] *.cpp Makefile")
+#f [a-f10]       ReadPipe("ls -l *.[ch]"); SetHotFile()
+f [f11]   MarkWord(" {}()[]<>+-*/=%\\|&!,.:;\t\""); ExecMarkWord("grep -n -w","*.[chf]"); Unmark(); MarkLn(); SwitchKeyDef(2)
+f [s-f11]	MarkWord(" {}()[]<>+-*/=%\\|&!,.:;\t\""); LookMarkTag(); Unmark()
+f [a-f11]	MarkWord(" {}()[]<>+-*/=%\\|&!,.:;\t\""); FindMarkStr(); Unmark()
+# If you hit Escape key during edln, the rest of the commands are skipped.
+f [c-f11] ExecCmd(); MarkLn(); SwitchKeyDef(2)
+f [s-f10]       MarkWord("\t <>\""); EditMarkWord()
+f [s-f20]       MarkWord("\t <>\""); EditMarkWord()
+f [c-f12] EditFName("tedrc.tmpl")
+f [s-f12]	LoadTedrc("tedrc")
+f [a-f12]	MergeTedrc("localtedrc")
+# reload current file
+f [ca-f12]	Reload()
+## This one is for making a '.o' file currently edited individually
+f [s-f9]	ExeCmdFnameExt("make",".o")
+##		If the file is already open, switch to this file; otherwise
+##		load the file
+f [f1]		RaiseOrLoad("$TEDDIR/ted.help")
+f [c-a][f1]	RaiseOrLoad("/usr/local/lib/Ted/tedrc")
+## execute command and place the output in the current file
+#f [c-q][s]	InsPipe("ls")
+# Excute command and and place output in a new file with name same as the command
+f [c-q][e]      ExecCmd()
+## Convert tab to space
+f [c-k][c-t] Tab2Space()
+f [ca-f]	SwitchFont()
+f [ca-1]	SetWinSize(80,24)
+f [ca-2]	SetWinSize(80,35)
+f [c-=]  SumRectBlock()
+
+##### create your template
+#f [c-m][d]	PutStr("do {\n\t\n} while ();\n"); up();up();right()
+#f [c-m][i]	PutStr("if () {\n\t\n}\n"); up(); up();right()
+#f [c-m][t]	PutStr("typedef struct {\n\t\n} ;\n") up();up();right()
+#f [c-m][v]	PutStr("void ()\n{\n\n}\n"); up();up();up();up();right();right();right();right();right()
+#f [c-m][f]	PutStr("for(;;) {\n\n}\n"); up();up();up();right();right();right();right()
+#f [c-m][m]	PutStr("main()\n{\n\n}\n"); up();up();
+######  Macro(Key strokes recording) ########
+f [c-m]		RecMacro()
+f [a-p]		PlayMacro()
+f [ca-p]	ExportMacro("ted.macro")
+###########################################
+########## keys-string binding  ###########
+d [as-!] "\e[31m"
+d [as-@] "\e[32m"
+d [a-0] "\e[m"
+#d [c-a][0] "\e[m"
+d [a-7] "\e[7m"
+#d [c-a][7] "\e[7m"
+d [space] " "
+d [!] "!"
+d ["] "\""
+d [#] "#"
+d [$] "$"
+d [%] "%"
+d [&] "&"
+d ['] "'"
+d [(] "("
+d [)] ")"
+d [*] "*"
+d [+] "+"
+d [minus] "-"
+d [.] "."
+d [,] ","
+d [/] "/"
+d [0] "0"
+d [1] "1"
+d [2] "2"
+d [3] "3"
+d [4] "4"
+d [5] "5"
+d [6] "6"
+d [7] "7"
+d [8] "8"
+d [9] "9"
+d [:] ":"
+d [;] ";"
+d [<] "<"
+d [=] "="
+d [>] ">"
+d [?] "?"
+d [@] "@"
+d [A] "A"
+d [B] "B"
+d [C] "C"
+d [D] "D"
+d [E] "E"
+d [F] "F"
+d [G] "G"
+d [H] "H"
+d [I] "I"
+d [J] "J"
+d [K] "K"
+d [L] "L"
+d [M] "M"
+d [N] "N"
+d [O] "O"
+d [P] "P"
+d [Q] "Q"
+d [R] "R"
+d [S] "S"
+d [T] "T"
+d [U] "U"
+d [V] "V"
+d [W] "W"
+d [X] "X"
+d [Y] "Y"
+d [Z] "Z"
+d [brl] "["
+d [\] "\\"
+d [brr] "]"
+d [^] "^"
+d [_] "_"
+d [`] "`"
+d [a] "a"
+d [b] "b"
+d [c] "c"
+d [d] "d"
+d [e] "e"
+d [f] "f"
+d [g] "g"
+d [h] "h"
+d [i] "i"
+d [j] "j"
+d [k] "k"
+d [l] "l"
+d [m] "m"
+d [n] "n"
+d [o] "o"
+d [p] "p"
+d [q] "q"
+d [r] "r"
+d [s] "s"
+d [t] "t"
+d [u] "u"
+d [v] "v"
+d [w] "w"
+d [x] "x"
+d [y] "y"
+d [z] "z"
+d [{] "{"
+d [|] "|"
+d [}] "}"
+d [~] "~"
+d [adia] "ä"
+d [odia] "ö"
+d [udia] "ü"
+d [Adia] "Ä"
+d [Odia] "Ö"
+d [Udia] "Ü"
+
+d [tab]	"\t"
+d [kp0] "0"
+d [kp1] "1"
+d [kp2] "2"
+d [kp3] "3"
+d [kp4] "4"
+d [kp5] "5"
+d [kp6] "6"
+d [kp8] "8"
+d [kp9] "9"
+d [kpplus] "+"
+d [kpminus] "-"
+d [kpmult] "*"
+d [kpdivide] "/"
+d [kpdot] "."
+d [kpenter] "\n"
+##### PC special key
+#d [print] "print undef"
+#d [pause] "pause undef"
+#### Sun special keys
+#d [cancel] "cancel undef"
+#d [sunprops] "props undef"
+#d [sunfront] "front undef"
+#d [sunopen] "open undef"
+#f [find] FindStr()
+#d [redo] "again undef"
+#d [undo] "undo undef"
+#d [suncopy] "copy undef"
+#d [sunpaste] "copy undef"
+#f [suncut] RepFind()
+########### Language keyword setting ############
+## Default constraint
+#	- Max lang 6
+#    Modify ted.h if you want to change that
+#  Remove the language you will never use to save memory
+##                                 -string color -C comment-
+#                                  vvvvvvvvvvv   vvvvvvvvvv
+lang ".c .h .cc .cpp" , bisque black #, pink black,  grey65 black, \
+red black "exit() break return continue goto free() malloc() realloc(,,) \
+strdup()", \
+cyan black "for while if else do switch case default", \
+green black "char short int long unsigned float double void typedef struct \
+u_char u_short u_long u_int FILE static extern NULL", \
+white black "printf() puts(s) fflush(fp) fopen(fname,mod) fclose(fp) fileno() \
+fread(ptr,size,n,fp) fwrite(ptr,size,n,fp) fseek(fp,offset,whence) \
+fgets(s,size,fp) \
+fputs() ferror() fgetpos() fsetpos() fgetc() fputs() \
+fprintf() ftell() lseek() open() popen() \
+pclose() read(fd,buf,n) write(fd,buf,n) getchar() close() opendir() fstat() \
+stat() chmod(path,mode) \
+fchmod(fd,mode) unlink(path) signal(signum,handler) kill(pid,sig) ioctl() \
+fcntl() fork() pipe() wait(int*status) \
+strcpy(dst,src) strcat(dst,src) strcmp(s1,s2) memcpy(dst,src,n) \
+memcmp(s1,s2,n) memmove() \
+memchr(s,chr) memset(s,chr,n) memcpy() strstr(s,s_needle) strchr(s,chr) \
+strlen() qsort(base,n,size,compar) usleep() vfork()"
+##
+## sh or bash
+## items with '#' char in the filename exetension section is for scripts.
+## Use regular expression
+lang ".sh .profile .bashrc #!.*/bin/sh #!.*/bin/ksh #!.*/bin/bash" , \
+bisque black #, pink black, yellow black, \
+red black "exit goto", \
+cyan black "for in if then else elif fi do while until case done default cd \
+alias export umask" green black "echo read cat find ls ln rm cp mv mkdir rmdir \
+tar dd cpio stty kill time"
+##
+## csh or tcsh
+## items with '#' char in the filename exetension section is for scripts.
+## Use regular expression
+lang ".csh .cshrc .tcshrc #!.*/bin/.*csh" , \
+bisque black #, pink black, yellow black, \
+red black "exit goto", \
+yellow black "cdpath path status history ignoreeof prompt" \
+cyan black "for in if then else endif set unset setenv cd source limit \
+alias umask" green black "echo read cat find ls ln rm cp mv mkdir rmdir \
+tar dd cpio stty kill time"
+##
+## Thanks to Richard James, raj@ast.man.ac.uk for his fortran setting
+lang ".for .f .f77 .inc" , bisque black c, pink black, green black, \
+green black "real integer complex common logical character type pointer allocatable \
+save intent optional data parameter", red black "module interface exit return continue \
+goto go to use", cyan black "call subroutine if then else end elseif endif do \
+enddo case"
+##
+## Too many functions in Java, only part of them
+lang ".java" , bisque black #, pink black,  grey65 black, \
+red black "exit break return continue goto try catch throw", \
+cyan black "for while if else do switch case default", \
+green black "char byte short int long unsigned float double final boolean \
+String Integer void private protected public package Font class static \
+extends implements import Dialog Frame Panel Label Button Checkbox TextField \
+Connection Statement ResultSet ResultSetMetaData PreparedStatement \
+BorderLayout ActionEvent Exception FileOutputStream PrintWriter \
+ActionListener KeyListener ItemListener WindowListener MenuItem List MenuBar \
+Menu Component Container ComponentListener Scrollbar", \
+white black "floor random fillRect println print drawString drawLine drawArc \
+drawRect getSource getParameter add addItem remove random append read \
+addActionListener setVisible pack super setSize setColor setFont sleep \
+setBackground getSize getImage drawImage getCodeBase setLayout getConnection \
+getMetaData getTables executeQuery getColumnCount getColumnName \
+windowClosed addWindowListener dispose validate", \
+yellow black "null new true false this instanceof"
+##
+## Thanks to jong@mrc-lmb.cam.ac.uk for his Perl setting
+lang ".pl .pm #!.*/bin/perl.*" , wheat black #, pink black,  grey65 black, \
+red black "next unlink return croak die warn last redo reset goto exit", \
+orange black "log localtime tr rand tie reverse lengthwrite select format \
+ split substr grep lc bless length uc abs wait \
+ splice print printf sprintf sort join system open opendir readdir close push \
+ shift unshift for foreach int ref undef then until unless while if else elsif \
+ do chr chop chomp accept atan bind binmode caller chdir chmod chown chroot \
+ close closedir cmp command connect cos crypt dbmclose dbmopen defined delete \
+ dump eacheof map tie eval exec exp fcntl fileno flock fork getc getgrgid \
+ gethostbyaddrhex index ioctl join keys values oct ord pack pipe pop qx read \
+ readlinkrecv rename rindex rmdir scalar seek seekdir semctl semget semop \
+ sendstat substr study srand socket sleep sin shutdown symlink syscall \
+ syswrite tell time times write wantarray utime unlink truncate kill", \
+green black "my local package require use ARGV ENV INC __FILE__ __END__ \
+ __LINE__ SIG HOME LOGDIR PATH PERLLIB ENV INC export PERLDB main",\
+white black "le gt ge lt perl eq ne sub",\
+yellow black "_"
+
+########### set color ##########
+s TextFg	grey80
+s TextBg	black
+s CursorFg	yellow
+s CursorBg	red
+s SepLineFg	yellow
+s SepLineBg	steelblue
+s MarkFg	yellow
+s MarkBg	blue
+s EnterStrFg	yellow
+s EnterStrBg	steelblue
+s EnterBorderFg	yellow
+s EnterBorderBg	steelblue
+s EnterRectBg	blue
+s EnterFirstFg  black
+s EnterFirstBg	yellow
+s StatusWarnFg	red
+s StatusWarnBg	black
+s StatusFSavedFg pink
+s StatusFSavedBg black
+s BracketFg red
+s BracketBg black
+s MouseFg black
+s MouseBg red
+s OvwCursorFg	blue
+s OvwCursorBg	green
+
+############# set the initial mode of ted ************
+# if set to 0, no autosave(auto backup), the unit is second
+set autosave 300
+# if set to 0, no word wrap
+# set WrapWidth 78
+set TabWidth 8
+# LeadSpaceTab is for replacing leading space in all lines with tab
+# Set it to 0 if you don't want
+set LeadSpaceTab 0
+# set initial edit mode of Indent off/on
+set Indent 1
+# set initial edit mode of Overwrite/Insert
+set Insert 1
+# rename the original one before saving   ( *~ file )
+set Backup 1
+# Delete the trailing blank of each line
+set TrimBlankTail 1
+# Move cursor to prev/next line if it is at the beginning/end of a line
+set CurAutoUpDownAtEdge 0
+# remove carriage return (^M)
+set StripCR 1
+# files like *.o .* are not listed
+filebrowser [^.]*[^o] [^.]*[^.]o [^.]
+#filebrowser *.[ch] *.java *.pl *.pm Makefile
+
+# Compiler type:
+#   1: gcc, javac
+#   2: hp's cc
+#   3: sun's cc
+#   4: aix's cc
+set Compiler 1
+
+LoadKeyDefInto "tedrc.vi" 1
+LoadKeyDefInto "tedrc.grep" 2
+LoadKeyDefInto "tedrc.filevisit" 3
+
+#
+#   +-+-+      +---+         +-+-+
+#   | | |      +---+         +-+-+
+#   +---+      +---+         +-+-+
+#     1          2             3
+# This controls the sequence of window-splitting
+set WinSplitSeq 123
+#set WinSplitSeq 12
+#set WinSplitSeq 2
+
+# I don't like this feature though most editors have it. Why ?  Because when
+# you copy a block in the current window; with this feature on, you must
+# place the cursor back.
+#set CursorFollowClick 1
+set CursorFollowClick 0
+
+set AutoBlockRepDel 0
+
+# restore cursor postion
+set RestCursor 1
+# restore window position
+set RestWinPos 1
+# restore window size
+set RestWinSize 1
+
+# Exit if this one is a duplicate open.
+set ExitDupOpen 1
+
+# If you press Exit but the file is not saved, Quit (Y/N)
+# 1 for yes, 0 for no, default is yes
+set FModifiedQuitYN 0
+
+# If you want to display Tab char, you can use [C-T][T] to toggle it.
+set DispTab 1
+# ascii no of the char you want to display, you can use 'xfd -fn 10x20' to
+# get char table
+set TabChar 187
+
+# The sequence you press Clt-Alt-F
+fontlist 6x12 7x13 8x16 10x20 12x24
+
+## include is a new command
+## This should be the last line
+include localtedrc

@@ -1,0 +1,23 @@
+# Put the local definition of current directory here, Overrides are OK.
+# Currently you cannot define syntax/keywords highlighting here
+# d [a-`] "---------------------------------"
+# set Insert 0
+#f [f12] system("./ted ff.c")
+f [f12] system("./ted ctags.c &")
+d [c-\]	"How are you\n"
+f [c-h]	PutStr("this is a test ")
+
+set TabWidth 2
+set LeadSpaceTab 0
+set autosave 300
+set Compiler 1
+set WinSplitSeq 12
+set CursorFollowClick 0
+set AutoBlockRepDel 0
+
+# Compiler type:
+#   1: gcc, javac
+#   2: hp's cc
+#   3: sun's cc
+#   4: aix's cc
+set Compiler 1

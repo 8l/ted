@@ -1,0 +1,68 @@
+    Ted : A Small and Powerful Text Editor for X Window
+
+Features:
+- Fully configurable keyboard, You can bind function and/or string to any key.
+  Ted can make full use of your PC keboard. (esp. Insert, Delete & Func keys)
+  'a-' stands for ALT key.  'c-' is CTRL key. 's-' is Shift key. Any
+  combinations of the modifier keys are allowed.
+  f [c-k][f]  FindStr()
+  f [a-b]   MarkBlk()
+  f [f9]          SaveIfModified(); system("make -f Makefile.dbg &")
+  .
+  d [a-`] "This \tis a \e[35mtest\e[m\n"
+  d [as-!] "\e[31m" # typing escape seq control code should be
+  d [a-7] "\e[7m"   # easier than usual
+- Multiple windows, multiple files, able to copy & paste between files/
+  windows. The window style can be (You can choose the styles you want)
+    +---+     +-+-+      +---+         +-+-+
+    |   |     | | |      +---+         +-+-+
+    +---+     +---+      +---+         +-+-+
+    single  2 vertical   2 horizontal  4 windows
+- vi mode (not complete emulation, coexits with normal ted key mapping)
+  You can also enjoy some convenience of 'vi'
+- Global and current directory configuration support
+- grep window : You can use up/down keys to select grep output and press enter
+  to goto this line of the file.
+- Simple IDE environment: you don't have to use goto line number function
+  when the 'cc' said your program has an error. Just select the error and
+  ted will goto the line you want to see.
+  (currently support GCC, HP ANSI CC and Sun's javac)
+- Most edit commands have undo & redo capabilities  (100 steps, configurable)
+- Keyword completion : Type the beginning several chars of a keywword and
+  press Shift-Tab. If only one match is found, Ted puts the keyword
+  directly. If more than one match is found, You can select from the menu.
+- Powerful rectangular block & line block operations
+  (insert copy, overwrite copy(rectangular block), delete, move,
+   uppercase/lowercase, shifting text in marked block)
+- Macro(key strokes) recording/playing/saving
+- History of typed commands in the input dialog box
+- Windows key style cut-copy-paste : s-delete c-insert s-insert
+- Display tab as special character you define. You can use this to debug
+  Tab-space mixing problem.
+- Parenthesis matching
+- Ctags support, you can easily go to the function you want to see.
+- Multiple file tag, you can switch between files easily.
+- Ability to remember the cursor position of the files you have edited
+  restore window size, position and font name.
+- Automatically raise the first Ted window(writeable) when you edit the same
+  file multiple times; and set files to read-only mode.
+- Auto saving (backup)
+- Backward search/replace,  ignore case/whole word match, in-block replace,
+  can go back to previous match, regular expression search
+- Syntax highlighting (support C,/bin/sh, Java, Perl, Fortran, self-defined)
+- Vertical input mode, AutoIndent,  Adjustable tab
+- File name completion
+- 2-byte language support (Chinese)
+- Only use standard X11 lib, screen display is fast.
+- And more ..
+
+-------------------------------------------
+FTP site:
+ftp://moon.csie.ntu.edu.tw/pub/X/ted  (latest update is here)
+      140.112.28.170
+ftp://ftp.x.org/contrib/editors
+  ( may not be there )
+-------------------------------------------
+
+Edward D. H. Liu
+dhliu@solar.csie.ntu.edu.tw
